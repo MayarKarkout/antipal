@@ -1,0 +1,125 @@
+<!-- templates/profile.html -->
+
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="title">
+<!--  Welcome, {{ current_user.name }}!-->
+</h1>
+<div class="column is-4 is-offset-4">
+    <h2 class="title">You can edit your profile here</h2>
+
+    <a class="button is-primary is-inverted is-outlined"
+       onclick="getLocation()"
+       style="margin-bottom: 30px">
+
+        Fill your location details automatically
+
+    </a>
+
+    <form method="POST" action="/find_my_location" id="form3">
+        <input type="hidden" id="country_field" name="country">
+        <input type="hidden" id="city_field" name="city">
+    </form>
+
+    <div class="box">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="notification is-danger">
+                {{ messages[0] }}. Go to <a href="{{ url_for('auth.login') }}">login page</a>.
+            </div>
+        {% endif %}
+        {% endwith %}
+
+
+        <form method="POST" action="/profile">
+
+
+            <div class="field">
+                <div class="control">
+                    First Name
+                    <input class="input is-large" type="text" name="first_name"
+                           {% if current_user.profile.first_name is not none%}
+                           placeholder={{current_user.profile.first_name}}
+                           {% else %}
+                           placeholder="First Name"
+                           {% endif %}
+                           autofocus=""
+                    >
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    Last Name
+                    <input class="input is-large" type="text" name="last_name"
+                           {% if current_user.profile.last_name is not none%}
+                           placeholder={{current_user.profile.last_name}}
+                           {% else %}
+                           placeholder="Last Name"
+                           {% endif %}
+                           autofocus=""
+                    >
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    Country
+                    <input class="input is-large" type="text" name="country"
+                           {% if current_user.profile.country is not none %}
+                           placeholder={{current_user.profile.country}}
+                           {% else %}
+                           placeholder="Country"
+                           {% endif %}
+                           autofocus=""
+                    >
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    City
+                    <input class="input is-large" type="text" name="city"
+                           {% if current_user.profile.city is not none %}
+                           placeholder={{current_user.profile.city}}
+                           {% else %}
+                           placeholder="City"
+                           {% endif %}
+                           autofocus=""
+                    >
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    Antipodal For Id
+                    <input class="input is-large" type="number" name="antipodal_for_id"
+                           {% if current_user.profile.user.antipodal_for_id is not none %}
+                           placeholder={{current_user.profile.user.antipodal_for_id}}
+                           {% else %}
+                           placeholder="antipodal for"
+                           {% endif %}
+                           autofocus=""
+                    >
+                </div>
+            </div>
+            <div class="field">
+                <div class="control">
+                    Antipodal Of Id
+                    <input class="input is-large" type="number" name="antipodal_of_id"
+                           {% if current_user.profile.user.antipodal_for_id is not none %}
+                           placeholder={{current_user.profile.user.antipodal_of_id}}
+                           {% else %}
+                           placeholder="antipodal of"
+                           {% endif %}
+                           autofocus=""
+                    >
+                </div>
+            </div>
+
+            <button class="button is-block is-info is-large is-fullwidth">Save</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

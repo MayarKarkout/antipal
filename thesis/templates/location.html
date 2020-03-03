@@ -1,0 +1,44 @@
+<!-- templates/index.html -->
+
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="title">
+  Choose how to fill your location details
+</h1>
+
+<div class="column is-4 is-offset-4">
+    <div class="box">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="notification is-danger">
+                {{ messages[0] }}. Go to <a href="{{ url_for('auth.login') }}">login page</a>.
+            </div>
+        {% endif %}
+        {% endwith %}
+
+        <h2 class="subtitle">
+            <form method="POST" action="/profile" id='form1'>
+                <button type="submit">Manually</button>
+            </form>
+        </h2>
+
+
+
+        <form method="POST" action="/profile" id='form2'>
+
+        </form>
+
+        <form method="POST" action="/find_my_location" id="form3">
+            <input type="hidden" id="country_field" name="country">
+            <input type="hidden" id="city_field" name="city">
+
+        </form>
+
+        <button onclick="getLocation()">Automatically</button>
+
+
+    </div>
+</div>
+
+{% endblock %}

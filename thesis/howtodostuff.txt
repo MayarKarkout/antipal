@@ -1,0 +1,14 @@
+
+# to run flask project
+
+    # full path
+    export FLASK_APP=/home/mayar/PycharmProjects/Thesis/thesis/__init__.py
+
+    # run command
+    python3 -m flask run
+
+    # enable debug
+    export FLASK_DEBUG=1
+
+    # website map
+    https://www.gloomaps.com/HAG7bHbTx7
